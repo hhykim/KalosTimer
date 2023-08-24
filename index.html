@@ -16,7 +16,7 @@
     <h3>난이도 선택</h3>
     <div>
         <label><input type="radio" id="normal" name="mode" checked>이지, 노멀</label>
-        <label><input type="radio" id="chaos" name="mode">카오스</label>
+        <label><input type="radio" id="chaos" name="mode" disabled>카오스</label>
     </div>
     <h3>음량 조절</h3>
     <div>
@@ -162,7 +162,7 @@
                 stop.disabled = false;
             } else {
                 normal.disabled = false;
-                chaos.disabled = false;
+                // chaos.disabled = false;
 
                 start.disabled = false;
                 stop.disabled = true;
