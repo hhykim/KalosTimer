@@ -87,13 +87,13 @@
         }
 
         function setTriggerId() {
-            const active = [254, 103, 50, 255];
-            const inactive = [102, 222, 254, 255];
+            const active = [255, 102, 51, 255];
+            const inactive = [102, 221, 255, 255];
 
             const rgba1 = context.getImageData(26, 138, 1, 1).data;
             const rgba2 = context.getImageData(24, 149, 1, 1).data;
 
-            if (rgba1.every((v, i) => v == active[i])) {
+            if (rgba1.every((v, i) => Math.abs(v - active[i]) <= 5)) {
                 phase1.checked = true;
                 delay = 15000;
 
@@ -101,13 +101,13 @@
                     running = true;
                     triggerId = setTimeout(setTimerId, delay - 3500);
                 }
-            } else if (rgba1.every((v, i) => v == inactive[i])) {
+            } else if (rgba1.every((v, i) => Math.abs(v - inactive[i]) <= 5)) {
                 phase1.checked = true;
                 running = false;
 
                 clearTimeout(triggerId);
                 clearTimeout(timerId);
-            } else if (rgba2.every((v, i) => v == active[i])) {
+            } else if (rgba2.every((v, i) => Math.abs(v - active[i]) <= 5)) {
                 phase2.checked = true;
 
                 if (normal.checked) {
@@ -120,7 +120,7 @@
                     running = true;
                     triggerId = setTimeout(setTimerId, delay - 3500);
                 }
-            } else if (rgba2.every((v, i) => v == inactive[i])) {
+            } else if (rgba2.every((v, i) => Math.abs(v - inactive[i]) <= 5)) {
                 phase2.checked = true;
                 running = false;
 
