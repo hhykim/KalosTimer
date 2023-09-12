@@ -11,9 +11,8 @@
             <select id="resolution">
                 <option>1920x1080</option>
                 <option>1366x768</option>
-            </select>,
-            <label><input type="checkbox" id="ui"> UI 최적화</label>,
-            <label><input type="checkbox" id="border"> 창모드 테두리</label>
+            </select> /
+            <label><input type="checkbox" id="ui"> UI 최적화</label>
         </li>
         <li>최대화된 미니맵을 <b><u>좌측 상단</u></b>에 <b><u>여백 없이</u></b> 배치<br>- 미니맵을 마우스, 인터페이스 등으로 가리면 인식 불가</li>
         <li><b>[시작] - [창] - [MapleStory] - [공유]</b></li>
@@ -51,7 +50,6 @@
 
         const resolution = document.getElementById("resolution");
         const ui = document.getElementById("ui");
-        const border = document.getElementById("border");
 
         const normal = document.getElementById("normal");
         const chaos = document.getElementById("chaos");
@@ -108,11 +106,6 @@
                     sx2 = 16, sy2 = 106;
                     break;
             }
-
-            if (border.checked) {
-                sy1 += 30;
-                sy2 += 30;
-            }
         }
 
         function setPainterId() {
@@ -129,8 +122,10 @@
             const active = [255, 102, 51, 255];
             const inactive = [102, 221, 255, 255];
 
-            const rgba1 = context.getImageData(sx1, sy1, 1, 1).data;
-            const rgba2 = context.getImageData(sx2, sy2, 1, 1).data;
+            const dy = video.videoHeight - resolution.value.split("x")[1];
+
+            const rgba1 = context.getImageData(sx1, sy1 + dy, 1, 1).data;
+            const rgba2 = context.getImageData(sx2, sy2 + dy, 1, 1).data;
 
             if (rgba1.every((v, i) => Math.abs(v - active[i]) <= 5)) {
                 phase1.checked = true;
@@ -196,7 +191,6 @@
             if (state) {
                 resolution.disabled = true;
                 ui.disabled = true;
-                border.disabled = true;
 
                 normal.disabled = true;
                 chaos.disabled = true;
@@ -206,7 +200,6 @@
             } else {
                 resolution.disabled = false;
                 ui.disabled = false;
-                border.disabled = false;
 
                 normal.disabled = false;
                 // chaos.disabled = false;
