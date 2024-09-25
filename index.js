@@ -21,6 +21,22 @@ const start = document.getElementById("start");
 const stop = document.getElementById("stop");
 const download = document.getElementById("download");
 
+const x = document.getElementById("x");
+if (localStorage.getItem("x") !== null) {
+    x.value = localStorage.getItem("x");
+}
+const y = document.getElementById("y");
+if (localStorage.getItem("y") !== null) {
+    y.value = localStorage.getItem("y");
+}
+const toggle = document.getElementById("toggle");
+if (localStorage.getItem("toggle") == "1") {
+    toggle.checked = true;
+
+    x.disabled = false;
+    y.disabled = false;
+}
+
 const phase1 = document.getElementById("phase1");
 const phase2 = document.getElementById("phase2");
 const invalid = document.getElementById("invalid");
@@ -88,7 +104,9 @@ function setTriggerId() {
     const active = [255, 102, 51, 255];
     const inactive = [102, 221, 255, 255];
 
-    if (video.videoHeight - resolution.value.split("x")[1] > 0) {
+    if (toggle.checked) {
+        dx = x.value, dy = y.value;
+    } else if (video.videoHeight - resolution.value.split("x")[1] > 0) {
         dx = 4, dy = 30;
     } else {
         dx = 0; dy = 0;
@@ -144,6 +162,28 @@ download.addEventListener("click", e => {
     link.href = context.canvas.toDataURL();
 
     link.click();
+});
+
+x.addEventListener("input", e => {
+   localStorage.setItem("x", e.target.value);
+});
+
+y.addEventListener("input", e => {
+   localStorage.setItem("y", e.target.value);
+});
+
+toggle.addEventListener("click", e => {
+    if (e.target.checked) {
+        localStorage.setItem("toggle", "1");
+
+        x.disabled = false;
+        y.disabled = false;
+    } else {
+        localStorage.setItem("toggle", "0");
+
+        x.disabled = true;
+        y.disabled = true;
+    }
 });
 
 function stopVideo() {
