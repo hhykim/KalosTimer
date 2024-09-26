@@ -156,36 +156,6 @@ stop.addEventListener("click", e => {
     stopVideo();
 });
 
-download.addEventListener("click", e => {
-    const link = document.createElement("a");
-    link.download = "image.png";
-    link.href = context.canvas.toDataURL();
-
-    link.click();
-});
-
-x.addEventListener("input", e => {
-   localStorage.setItem("x", e.target.value);
-});
-
-y.addEventListener("input", e => {
-   localStorage.setItem("y", e.target.value);
-});
-
-toggle.addEventListener("click", e => {
-    if (e.target.checked) {
-        localStorage.setItem("toggle", "1");
-
-        x.disabled = false;
-        y.disabled = false;
-    } else {
-        localStorage.setItem("toggle", "0");
-
-        x.disabled = true;
-        y.disabled = true;
-    }
-});
-
 function stopVideo() {
     clearTimeout(painterId);
     clearTimeout(triggerId);
@@ -219,3 +189,33 @@ function setInputsState(state) {
         invalid.checked = true;
     }
 }
+
+download.addEventListener("click", e => {
+    const link = document.createElement("a");
+    link.download = "image.png";
+    link.href = context.canvas.toDataURL();
+
+    link.click();
+});
+
+x.addEventListener("input", e => {
+   localStorage.setItem("x", e.target.value);
+});
+
+y.addEventListener("input", e => {
+   localStorage.setItem("y", e.target.value);
+});
+
+toggle.addEventListener("click", e => {
+    if (e.target.checked) {
+        localStorage.setItem("toggle", "1");
+
+        x.disabled = false;
+        y.disabled = false;
+    } else {
+        localStorage.setItem("toggle", "0");
+
+        x.disabled = true;
+        y.disabled = true;
+    }
+});
