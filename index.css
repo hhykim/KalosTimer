@@ -1,4 +1,6 @@
 body {
-    width: 25%;
-    margin: 5vh auto;
+    position: absolute;
+    left: 50%;
+    margin-top: 4vh;
+    transform: translateX(-50%);
 }
