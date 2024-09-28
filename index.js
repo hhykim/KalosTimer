@@ -105,7 +105,8 @@ function setTriggerId() {
     const inactive = [102, 221, 255, 255];
 
     if (toggle.checked) {
-        dx = x.value, dy = y.value;
+        dx = Number(x.value);
+        dy = Number(y.value);
     } else if (video.videoHeight - resolution.value.split("x")[1] > 0) {
         dx = 4, dy = 30;
     } else {
