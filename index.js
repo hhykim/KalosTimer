@@ -87,6 +87,46 @@ function setCoordinates() {
                 sx2 = 16, sy2 = 106;
             }
             break;
+        case "1920x1200":
+            if (basic.checked) {
+                sx1 = 27, sy1 = 153;
+                sx2 = 25, sy2 = 166;
+            } else {
+                sx1 = 17, sy1 = 98;
+                sx2 = 16, sy2 = 106;
+            }
+            break;
+        case "2560x1440":
+            if (basic.checked) {
+                sx1 = 32, sy1 = 184;
+                sx2 = 30, sy2 = 199;
+            } else {
+                sx1 = 35, sy1 = 196;
+                sx2 = 33, sy2 = 212;
+            }
+            break;
+        case "2560x1600":
+            if (basic.checked) {
+                sx1 = 36, sy1 = 205;
+                sx2 = 34, sy2 = 221;
+            } else {
+                sx1 = 35, sy1 = 196;
+                sx2 = 33, sy2 = 212;
+            }
+            break;
+        case "2732x1536":
+            sx1 = 35, sy1 = 196;
+            sx2 = 33, sy2 = 212;
+            break;
+        case "3840x2160":
+            if (basic.checked) {
+                sx1 = 49, sy1 = 276;
+                sx2 = 46, sy2 = 299;
+            } else {
+                sx1 = 35, sy1 = 196;
+                sx2 = 33, sy2 = 212;
+            }
+            break;
     }
 }
 
