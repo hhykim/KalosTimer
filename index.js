@@ -150,6 +150,7 @@ function setTriggerId() {
     } else {
         dx = 0;
         dy = video.videoHeight - resolution.value.split("x")[1];
+    }
 
     const rgba1 = context.getImageData(sx1 + dx, sy1 + dy, 1, 1).data;
     const rgba2 = context.getImageData(sx2 + dx, sy2 + dy, 1, 1).data;
