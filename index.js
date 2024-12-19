@@ -80,8 +80,8 @@ function setCoordinates() {
             break;
         case "1920x1080":
             if (basic.checked) {
-                sx1 = 24, sy1 = 138;
-                sx2 = 23, sy2 = 149;
+                sx1 = 30, sy1 = 151;
+                sx2 = 23, sy2 = 162;
             } else {
                 sx1 = 17, sy1 = 98;
                 sx2 = 16, sy2 = 106;
