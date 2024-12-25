@@ -26,23 +26,30 @@
     <hr>
     <ol>
         <li>
-            <select class="form-select select-sm col-4" id="resolution">
+            <select class="form-select select-sm col-4 form-inline mx-1" id="resolution">
                 <option value="1366x768">1366 x 768</option>
                 <option value="1920x1080" selected>1920 x 1080</option>
                 <option value="1920x1200">1920 x 1200</option>
                 <option value="2560x1440">2560 x 1440</option>
                 <option value="2560x1600">2560 x 1600</option>
                 <option value="2732x1536">2732 x 1536</option>
-            </select>
-            <button class="btn btn-primary btn-sm btn-action tooltip tooltip-right text-bold" data-tooltip="[인게임 옵션] - [UI] - [UI 크기]">?</button>
+            </select> /
+            <label class="form-checkbox form-inline tooltip mx-2" data-tooltip="[인게임 옵션] - [UI] - [UI 크기]">
+                <input type="checkbox" id="optimal">
+                <i class="form-icon"></i>최적 비율
+            </label>
             <div class="form-group">
                 <label class="form-radio form-inline">
-                    <input type="radio" id="basic" name="ui" checked>
-                    <i class="form-icon"></i>기본 비율
+                    <input type="radio" id="normal" name="mode" value="0" checked>
+                    <i class="form-icon"></i>이지, 노멀
                 </label>
                 <label class="form-radio form-inline">
-                    <input type="radio" id="optimal" name="ui">
-                    <i class="form-icon"></i>최적 비율
+                    <input type="radio" id="chaos" name="mode" value="1">
+                    <i class="form-icon"></i>카오스
+                </label>
+                <label class="form-radio form-inline">
+                    <input type="radio" id="extreme" name="mode" value="2">
+                    <i class="form-icon"></i>익스트림
                 </label>
             </div>
             <div>
@@ -62,13 +69,25 @@
         <button class="btn btn-success btn-sm mx-1" id="download" disabled>
             <i class="icon icon-download"></i>
         </button>
-        <a class="btn btn-error btn-sm tooltip float-right" href="#advanced" data-tooltip="창모드 테두리 보정">고급 설정</a>
+        <div class="dropdown dropdown-right float-right">
+            <a class="btn btn-error btn-sm dropdown-toggle" tabindex="0">
+                고급 설정<i class="icon icon-caret"></i>
+            </a>
+            <ul class="menu text-small">
+                <li class="menu-item">
+                    <a href="#advanced">창모드 테두리 보정</a>
+                </li>
+                <li class="menu-item">
+                    <a href="#roi">카오스/익스트림 설정</a>
+                </li>
+            </ul>
+        </div>
         <div class="modal modal-sm" id="advanced">
             <a class="modal-overlay" href="#" aria-label="Close"></a>
             <div class="modal-container">
                 <div class="modal-header">
                     <a class="btn btn-clear float-right" href="#" aria-label="Close"></a>
-                    <div class="modal-title h6">고급 설정</div>
+                    <div class="modal-title h6">창모드 테두리 보정</div>
                 </div>
                 <div class="modal-body">
                     <div class="content">
@@ -93,6 +112,51 @@
                 <div class="modal-footer"></div>
             </div>
         </div>
+        <div class="modal modal-sm" id="roi">
+            <a class="modal-overlay" href="#" aria-label="Close"></a>
+            <div class="modal-container">
+                <div class="modal-header">
+                    <a class="btn btn-clear float-right" href="#" aria-label="Close"></a>
+                    <div class="modal-title h6">카오스/익스트림 설정</div>
+                </div>
+                <div class="modal-body">
+                    <div class="content">
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <label class="form-label label-sm col-2">LT</label>
+                                <div class="input-group col-8">
+                                    <input class="form-input input-sm" type="number" id="sx" value="10">
+                                    <input class="form-input input-sm" type="number" id="sy" value="450">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label label-sm col-2">RB</label>
+                                <div class="input-group col-8">
+                                    <input class="form-input input-sm" type="number" id="ex" value="200">
+                                    <input class="form-input input-sm" type="number" id="ey" value="600">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer p-centered">
+                    <div class="popover popover-bottom">
+                        <button class="btn btn-success" id="popup">자동 입력</button>
+                        <div class="popover-container">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="card-title text-center text-bold">&lt;선택할 영역&gt;</div>
+                                </div>
+                                <div class="card-image">
+                                    <img src="roi.png" class="img-responsive p-centered">
+                                </div>
+                                <div class="card-footer"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </h6>
     <fieldset disabled>
         <div class="form-group mx-1">
@@ -115,8 +179,9 @@
         <canvas id="canvas" width="333" height="333"></canvas>
     </div>
     <div class="toast text-center text-bold text-small">
-        <p>(12/19) 최대 해상도 변경 (UHD -> QHD)</p>
+        <p>(12/25) 카오스, 익스트림 모드 추가!!</p>
     </div>
+    <script src="https://docs.opencv.org/4.x/opencv.js"></script>
     <script src="index.js"></script>
 </body>
 </html>
