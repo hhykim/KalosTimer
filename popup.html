@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <title>영역 선택</title>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <script>
+        "use strict";
+
+        const sx = opener.document.getElementById("sx");
+        const sy = opener.document.getElementById("sy");
+        const ex = opener.document.getElementById("ex");
+        const ey = opener.document.getElementById("ey");
+
+        const video = opener.document.getElementById("video");
+        const width = video.videoWidth;
+        const height = video.videoHeight;
+
+        const context = document.getElementById("canvas").getContext("2d");
+        context.canvas.width = width;
+        context.canvas.height = height;
+        context.drawImage(video, 0, 0);
+
+        const canvas = document.createElement("canvas");
+        canvas.width = width;
+        canvas.height = height;
+        canvas.getContext("2d").drawImage(context.canvas, 0, 0);
+
+        let startX, startY;
+        let endX, endY;
+
+        let dragging = false;
+        context.lineWidth = 3;
+        context.strokeStyle = "red";
+
+        context.canvas.addEventListener("mousedown", e => {
+            startX = e.offsetX
+            startY = e.offsetY
+
+            dragging = true;
+        });
+
+        context.canvas.addEventListener("mousemove", e => {
+            if (!dragging) return;
+
+            endX = e.offsetX;
+            endY = e.offsetY;
+
+            context.drawImage(canvas, 0, 0);
+            context.strokeRect(startX, startY, endX - startX, endY - startY);
+        });
+
+        context.canvas.addEventListener("mouseup", e => {
+            dragging = false;
+
+            sx.value = Math.min(startX, endX);
+            sy.value = Math.min(startY, endY);
+
+            ex.value = Math.max(startX, endX);
+            ey.value = Math.max(startY, endY);
+
+            const event = new InputEvent("input", { bubbles: true });
+            sx.dispatchEvent(event);
+            sy.dispatchEvent(event);
+            ex.dispatchEvent(event);
+            ey.dispatchEvent(event);
+
+            close();
+        });
+    </script>
+</body>
+</html>
