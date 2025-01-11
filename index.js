@@ -287,6 +287,16 @@ function findCircles() {
         return result;
     } catch (e) {
         stop.click();
+
+        Swal.fire({
+            titleText: "OpenCV.js error",
+            text: "Log: [F12] - [Console]",
+            icon: "warning",
+            iconColor: "red",
+            toast: true,
+            showConfirmButton: false
+        });
+        console.log(e.stack);
     }
 };
 
