@@ -179,8 +179,10 @@ function setTrigger() {
 
             if (normal.checked) {
                 delay = 15000;
+            } else if (chaos.checked) {
+                delay = 13500;
             } else {
-                delay = 12000;
+                delay = 13000;
             }
 
             setTimer(delay - 3500);
@@ -207,14 +209,18 @@ function setTrigger() {
 
                     clearTimeout(timerId);
                     setTimer((lastDelay - 3000) - (performance.now() - timestamp));
-                } else if (extreme.checked) {
+                } else {
                     delay = 10000;
 
                     clearTimeout(timerId);
                     setTimer((lastDelay - 5000) - (performance.now() - timestamp));
                 }
             } else if (phase2.checked) {
-                delay = 10000;
+                if (chaos.checked) {
+                    delay = 11500;
+                } else {
+                    delay = 11000;
+                }
 
                 clearTimeout(timerId);
                 setTimer((lastDelay - 2000) - (performance.now() - timestamp));
@@ -228,11 +234,15 @@ function setTrigger() {
                 clearTimeout(timerId);
                 if (chaos.checked) {
                     setTimer((lastDelay + 3000) - (performance.now() - timestamp));
-                } else if (extreme.checked) {
+                } else {
                     setTimer((lastDelay + 5000) - (performance.now() - timestamp));
                 }
             } else if (phase2.checked) {
-                delay = 12000;
+                if (chaos.checked) {
+                    delay = 13500;
+                } else {
+                    delay = 13000;
+                }
 
                 clearTimeout(timerId);
                 setTimer((lastDelay + 2000) - (performance.now() - timestamp));
