@@ -435,3 +435,30 @@ popup.addEventListener("click", e => {
         open("popup.html", "popup", "popup, width=" + video.videoWidth + ", height=" + video.videoHeight);
     }
 });
+
+function clearLocalStorage() {
+    Swal.fire({
+        titleText: "로컬 스토리지 초기화",
+        icon: "question",
+        toast: true,
+        showCancelButton: true
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire({
+                titleText: "초기화 중...",
+                icon: "info",
+                toast: true,
+                timer: 2000,
+                timerProgressBar: true,
+                showConfirmButton: false,
+                didOpen: () => {
+                    stop.click();
+                    start.disabled = true;
+                }
+            }).then(() => {
+                localStorage.clear();
+                location.replace("");
+            });
+        }
+    });
+}
