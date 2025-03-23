@@ -432,7 +432,7 @@ popup.addEventListener("click", e => {
     if (video.srcObject === null) {
         alert("먼저 화면 공유를 시작해 주세요.");
     } else {
-        open("popup.html", "popup", "popup, width=" + video.videoWidth + ", height=" + video.videoHeight);
+        open("popup.html", "popup", `popup, width=${video.videoWidth}, height=${video.videoHeight}`);
     }
 });
 
