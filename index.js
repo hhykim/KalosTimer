@@ -64,6 +64,8 @@ const ey = document.getElementById("ey");
 if (localStorage.getItem("ey") !== null) {
     ey.value = localStorage.getItem("ey");
 }
+const meter = document.getElementById("meter");
+const test = document.getElementById("test");
 const popup = document.getElementById("popup");
 
 const phase1 = document.getElementById("phase1");
@@ -426,6 +428,15 @@ ex.addEventListener("input", e => {
 
 ey.addEventListener("input", e => {
     localStorage.setItem("ey", e.target.value);
+});
+
+test.addEventListener("click", e => {
+    if (video.srcObject === null) {
+        alert("먼저 화면 공유를 시작해 주세요.");
+    } else {
+        meter.value = findCircles();
+        meter.dataset.tooltip = `${meter.value}간섭`;
+    }
 });
 
 popup.addEventListener("click", e => {

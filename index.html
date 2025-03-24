@@ -43,11 +43,11 @@
                     <input type="radio" id="normal" name="mode" value="0" checked>
                     <i class="form-icon"></i>이지, 노멀
                 </label>
-                <label class="form-radio form-inline">
+                <label class="form-radio form-inline tooltip" data-tooltip="고급 설정 필수">
                     <input type="radio" id="chaos" name="mode" value="1">
                     <i class="form-icon"></i>카오스
                 </label>
-                <label class="form-radio form-inline">
+                <label class="form-radio form-inline tooltip" data-tooltip="고급 설정 필수">
                     <input type="radio" id="extreme" name="mode" value="2">
                     <i class="form-icon"></i>익스트림
                 </label>
@@ -141,6 +141,10 @@
                                 </div>
                             </div>
                         </form>
+                        <div>
+                            <meter class="meter tooltip my-2" id="meter" value="0" optimum="1" min="0" max="4" low="2" high="3" data-tooltip="0간섭"></meter>
+                            <button class="btn btn-sm p-centered" id="test">테스트</button>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer p-centered">
