@@ -19,7 +19,7 @@
 <body>
     <h4>
         <i class="icon icon-time"></i><b> 칼로스 왼비 타이머</b>
-        <button class="btn btn-success btn-sm float-right" onclick="window.open('https://open.kakao.com/me/csmin');">
+        <button class="btn btn-success btn-sm tooltip tooltip-left float-right" data-tooltip="개발자 문의" onclick="window.open('https://open.kakao.com/me/csmin');">
             <i class="icon icon-message"></i>
         </button>
     </h4>
@@ -38,6 +38,9 @@
                 <input type="checkbox" id="optimal">
                 <i class="form-icon"></i>최적 비율
             </label>
+            <button class="btn btn-error btn-sm s-circle tooltip tooltip-left float-right" data-tooltip="알려진 버그" onclick="window.open('https://github.com/hhykim/KalosTimer/issues/1');">
+                <i class="icon icon-more-horiz"></i>
+            </button>
             <div class="form-group">
                 <label class="form-radio form-inline">
                     <input type="radio" id="normal" name="mode" value="0" checked>
