@@ -166,7 +166,7 @@ function setTrigger() {
             running = true;
             delay = 15000;
 
-            setTimer(delay - 3500);
+            setTimer(delay - 4500);
         }
     } else if (rgba1.every((v, i) => Math.abs(v - inactive[i]) < 10)) {
         phase1.checked = true;
@@ -187,7 +187,7 @@ function setTrigger() {
                 delay = 13000;
             }
 
-            setTimer(delay - 3500);
+            setTimer(delay - 4500);
         }
     } else if (rgba2.every((v, i) => Math.abs(v - inactive[i]) < 10)) {
         phase2.checked = true;
@@ -317,7 +317,7 @@ function setTimer(once) {
     timestamp = performance.now();
 
     if (once < 0) {
-        nextDelay = delay - 3500;
+        nextDelay = delay - 4500;
     }
     timerId = setTimeout(setTimerId, once);
 }
