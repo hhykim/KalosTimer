@@ -310,7 +310,7 @@ function findCircles() {
         });
         console.log(e.stack);
     }
-};
+}
 
 function setTimer(once) {
     lastDelay = once;

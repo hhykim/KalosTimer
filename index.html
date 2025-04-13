@@ -2,6 +2,7 @@
 <html lang="ko">
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>칼로스 왼비 타이머</title>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-V8FTDNHCVH"></script>
@@ -28,180 +29,182 @@
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
-    <h4>
-        <i class="icon icon-time"></i><b> 칼로스 왼비 타이머</b>
-        <button class="btn btn-success btn-sm tooltip tooltip-left float-right" data-tooltip="개발자 문의" onclick="window.open('https://open.kakao.com/me/csmin');">
-            <i class="icon icon-message"></i>
-        </button>
-    </h4>
-    <hr>
-    <ol>
-        <li>
-            <select class="form-select select-sm col-4 form-inline mx-1" id="resolution">
-                <option value="1366x768">1366 x 768</option>
-                <option value="1920x1080" selected>1920 x 1080</option>
-                <option value="1920x1200">1920 x 1200</option>
-                <option value="2560x1440">2560 x 1440</option>
-                <option value="2560x1600">2560 x 1600</option>
-                <option value="2732x1536">2732 x 1536</option>
-            </select> /
-            <label class="form-checkbox form-inline tooltip mx-2" data-tooltip="[인게임 옵션] - [UI] - [UI 크기]">
-                <input type="checkbox" id="optimal">
-                <i class="form-icon"></i>최적 비율
-            </label>
-            <button class="btn btn-error btn-sm s-circle tooltip tooltip-left float-right" data-tooltip="알려진 버그" onclick="window.open('https://github.com/hhykim/KalosTimer/issues/1');">
-                <i class="icon icon-more-horiz"></i>
+    <div class="wrapper">
+        <h4>
+            <i class="icon icon-time"></i><b> 칼로스 왼비 타이머</b>
+            <button class="btn btn-success btn-sm tooltip tooltip-left float-right" type="button" data-tooltip="개발자 문의" onclick="window.open('https://open.kakao.com/me/csmin');">
+                <i class="icon icon-message"></i>
             </button>
-            <div class="form-group">
+        </h4>
+        <hr>
+        <ol>
+            <li>
+                <select class="form-select select-sm col-4 form-inline mx-1" id="resolution">
+                    <option value="1366x768">1366 x 768</option>
+                    <option value="1920x1080" selected>1920 x 1080</option>
+                    <option value="1920x1200">1920 x 1200</option>
+                    <option value="2560x1440">2560 x 1440</option>
+                    <option value="2560x1600">2560 x 1600</option>
+                    <option value="2732x1536">2732 x 1536</option>
+                </select> /
+                <label class="form-checkbox form-inline tooltip mx-2" data-tooltip="[인게임 옵션] - [UI] - [UI 크기]">
+                    <input type="checkbox" id="optimal">
+                    <i class="form-icon"></i>최적 비율
+                </label>
+                <button class="btn btn-error btn-sm s-circle tooltip tooltip-left float-right" type="button" data-tooltip="알려진 버그" onclick="window.open('https://github.com/hhykim/KalosTimer/issues/1');">
+                    <i class="icon icon-more-horiz"></i>
+                </button>
+                <div class="form-group">
+                    <label class="form-radio form-inline">
+                        <input type="radio" id="normal" name="mode" value="0" checked>
+                        <i class="form-icon"></i>이지, 노멀
+                    </label>
+                    <label class="form-radio form-inline tooltip" data-tooltip="고급 설정 필수">
+                        <input type="radio" id="chaos" name="mode" value="1">
+                        <i class="form-icon"></i>카오스
+                    </label>
+                    <label class="form-radio form-inline tooltip" data-tooltip="고급 설정 필수">
+                        <input type="radio" id="extreme" name="mode" value="2">
+                        <i class="form-icon"></i>익스트림
+                    </label>
+                </div>
+                <div>
+                    <span class="label label-primary label-rounded">음량</span>
+                    <input type="range" id="volume" value="0.3" min="0" max="1" step="0.1">
+                </div>
+            </li>
+            <li>최대화된 미니맵을 <b><u>좌측 상단</u></b>에 <b><u>여백 없이</u></b> 배치<br>- 미니맵을 마우스, 인터페이스 등으로 가리면 인식 불가</li>
+            <li><b>[시작] - [창] - [MapleStory] - [공유]</b></li>
+            <li>칼로스 입장</li>
+        </ol>
+        <hr>
+        <h6>
+            <i class="icon icon-share"></i><b> 화면 공유</b>
+            <button class="btn btn-primary btn-sm mx-1" type="button" id="start">시작</button>
+            <button class="btn btn-primary btn-sm" type="button" id="stop" disabled>중지</button>
+            <button class="btn btn-success btn-sm mx-1" type="button" id="download" disabled>
+                <i class="icon icon-download"></i>
+            </button>
+            <div class="dropdown dropdown-right float-right">
+                <a class="btn btn-error btn-sm dropdown-toggle" tabindex="0">
+                    고급 설정<i class="icon icon-caret"></i>
+                </a>
+                <ul class="menu text-small">
+                    <li class="menu-item">
+                        <a href="#advanced">창모드 테두리 보정</a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#roi">카오스/익스트림 설정</a>
+                    </li>
+                    <div class="divider"></div>
+                    <li class="menu-item">
+                        <a href="javascript:clearLocalStorage();">설정 초기화</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="modal modal-sm" id="advanced">
+                <a class="modal-overlay" href="#" aria-label="Close"></a>
+                <div class="modal-container">
+                    <div class="modal-header">
+                        <a class="btn btn-clear float-right" href="#" aria-label="Close"></a>
+                        <div class="modal-title h6">창모드 테두리 보정</div>
+                    </div>
+                    <div class="modal-body">
+                        <div class="content">
+                            <form class="form-group" action="javascript:void(0);">
+                                <label class="form-switch tooltip tooltip-bottom" data-tooltip="필요한 경우만 활성화하세요.">
+                                    <input type="checkbox" id="toggle">
+                                    <i class="form-icon"></i>활성화
+                                </label>
+                            </form>
+                            <form class="form-horizontal" action="javascript:void(0);">
+                                <div class="form-group">
+                                    <label class="form-label label-sm col-2" for="x">dx</label>
+                                    <input class="form-input input-sm col-6" type="number" id="x" value="0" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label label-sm col-2" for="y">dy</label>
+                                    <input class="form-input input-sm col-6" type="number" id="y" value="0" disabled>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer"></div>
+                </div>
+            </div>
+            <div class="modal modal-sm" id="roi">
+                <a class="modal-overlay" href="#" aria-label="Close"></a>
+                <div class="modal-container">
+                    <div class="modal-header">
+                        <a class="btn btn-clear float-right" href="#" aria-label="Close"></a>
+                        <div class="modal-title h6">카오스/익스트림 설정</div>
+                    </div>
+                    <div class="modal-body">
+                        <div class="content">
+                            <form class="form-horizontal" action="javascript:void(0);">
+                                <div class="form-group">
+                                    <label class="form-label label-sm col-2">LT</label>
+                                    <div class="input-group col-8">
+                                        <input class="form-input input-sm" type="number" id="sx" value="10">
+                                        <input class="form-input input-sm" type="number" id="sy" value="450">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label label-sm col-2">RB</label>
+                                    <div class="input-group col-8">
+                                        <input class="form-input input-sm" type="number" id="ex" value="200">
+                                        <input class="form-input input-sm" type="number" id="ey" value="600">
+                                    </div>
+                                </div>
+                            </form>
+                            <div>
+                                <meter class="meter tooltip my-2" id="meter" value="0" optimum="1" min="0" max="4" low="2" high="3" data-tooltip="0간섭"></meter>
+                                <button class="btn btn-sm p-centered" type="button" id="test">테스트</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer p-centered">
+                        <div class="popover popover-bottom">
+                            <button class="btn btn-success" type="button" id="popup">자동 입력</button>
+                            <div class="popover-container">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <div class="card-title text-center text-bold">&lt;선택할 영역&gt;</div>
+                                    </div>
+                                    <div class="card-image">
+                                        <img src="roi.png" class="img-responsive p-centered">
+                                    </div>
+                                    <div class="card-footer"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </h6>
+        <fieldset disabled>
+            <div class="form-group mx-1">
                 <label class="form-radio form-inline">
-                    <input type="radio" id="normal" name="mode" value="0" checked>
-                    <i class="form-icon"></i>이지, 노멀
+                    <input type="radio" id="phase1" name="phase">
+                    <i class="form-icon"></i>1페
                 </label>
-                <label class="form-radio form-inline tooltip" data-tooltip="고급 설정 필수">
-                    <input type="radio" id="chaos" name="mode" value="1">
-                    <i class="form-icon"></i>카오스
+                <label class="form-radio form-inline">
+                    <input type="radio" id="phase2" name="phase">
+                    <i class="form-icon"></i>2페
                 </label>
-                <label class="form-radio form-inline tooltip" data-tooltip="고급 설정 필수">
-                    <input type="radio" id="extreme" name="mode" value="2">
-                    <i class="form-icon"></i>익스트림
+                <label class="form-radio form-inline">
+                    <input type="radio" id="invalid" name="phase" checked>
+                    <i class="form-icon"></i>인식 불가
                 </label>
             </div>
-            <div>
-                <span class="label label-primary label-rounded">음량</span>
-                <input type="range" id="volume" value="0.3" max="1" step="0.1">
-            </div>
-        </li>
-        <li>최대화된 미니맵을 <b><u>좌측 상단</u></b>에 <b><u>여백 없이</u></b> 배치<br>- 미니맵을 마우스, 인터페이스 등으로 가리면 인식 불가</li>
-        <li><b>[시작] - [창] - [MapleStory] - [공유]</b></li>
-        <li>칼로스 입장</li>
-    </ol>
-    <hr>
-    <h6>
-        <i class="icon icon-share"></i><b> 화면 공유</b>
-        <button class="btn btn-primary btn-sm mx-1" id="start">시작</button>
-        <button class="btn btn-primary btn-sm" id="stop" disabled>중지</button>
-        <button class="btn btn-success btn-sm mx-1" id="download" disabled>
-            <i class="icon icon-download"></i>
-        </button>
-        <div class="dropdown dropdown-right float-right">
-            <a class="btn btn-error btn-sm dropdown-toggle" tabindex="0">
-                고급 설정<i class="icon icon-caret"></i>
-            </a>
-            <ul class="menu text-small">
-                <li class="menu-item">
-                    <a href="#advanced">창모드 테두리 보정</a>
-                </li>
-                <li class="menu-item">
-                    <a href="#roi">카오스/익스트림 설정</a>
-                </li>
-                <div class="divider"></div>
-                <li class="menu-item">
-                    <a href="javascript:clearLocalStorage();">설정 초기화</a>
-                </li>
-            </ul>
+        </fieldset>
+        <div class="empty">
+            <video id="video" autoplay style="display: none;"></video>
+            <canvas id="canvas" width="333" height="333"></canvas>
         </div>
-        <div class="modal modal-sm" id="advanced">
-            <a class="modal-overlay" href="#" aria-label="Close"></a>
-            <div class="modal-container">
-                <div class="modal-header">
-                    <a class="btn btn-clear float-right" href="#" aria-label="Close"></a>
-                    <div class="modal-title h6">창모드 테두리 보정</div>
-                </div>
-                <div class="modal-body">
-                    <div class="content">
-                        <form class="form-group">
-                            <label class="form-switch tooltip tooltip-bottom" data-tooltip="필요한 경우만 활성화하세요.">
-                                <input type="checkbox" id="toggle">
-                                <i class="form-icon"></i>활성화
-                            </label>
-                        </form>
-                        <form class="form-horizontal">
-                            <div class="form-group">
-                                <label class="form-label label-sm col-2" for="x">dx</label>
-                                <input class="form-input input-sm col-6" type="number" id="x" value="0" disabled>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label label-sm col-2" for="y">dy</label>
-                                <input class="form-input input-sm col-6" type="number" id="y" value="0" disabled>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <div class="modal-footer"></div>
-            </div>
+        <div class="toast text-center text-bold text-small">
+            <p>(4/9) 타이머 기계음 -> 목소리로 변경</p>
         </div>
-        <div class="modal modal-sm" id="roi">
-            <a class="modal-overlay" href="#" aria-label="Close"></a>
-            <div class="modal-container">
-                <div class="modal-header">
-                    <a class="btn btn-clear float-right" href="#" aria-label="Close"></a>
-                    <div class="modal-title h6">카오스/익스트림 설정</div>
-                </div>
-                <div class="modal-body">
-                    <div class="content">
-                        <form class="form-horizontal">
-                            <div class="form-group">
-                                <label class="form-label label-sm col-2">LT</label>
-                                <div class="input-group col-8">
-                                    <input class="form-input input-sm" type="number" id="sx" value="10">
-                                    <input class="form-input input-sm" type="number" id="sy" value="450">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label label-sm col-2">RB</label>
-                                <div class="input-group col-8">
-                                    <input class="form-input input-sm" type="number" id="ex" value="200">
-                                    <input class="form-input input-sm" type="number" id="ey" value="600">
-                                </div>
-                            </div>
-                        </form>
-                        <div>
-                            <meter class="meter tooltip my-2" id="meter" value="0" optimum="1" min="0" max="4" low="2" high="3" data-tooltip="0간섭"></meter>
-                            <button class="btn btn-sm p-centered" id="test">테스트</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer p-centered">
-                    <div class="popover popover-bottom">
-                        <button class="btn btn-success" id="popup">자동 입력</button>
-                        <div class="popover-container">
-                            <div class="card">
-                                <div class="card-header">
-                                    <div class="card-title text-center text-bold">&lt;선택할 영역&gt;</div>
-                                </div>
-                                <div class="card-image">
-                                    <img src="roi.png" class="img-responsive p-centered">
-                                </div>
-                                <div class="card-footer"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </h6>
-    <fieldset disabled>
-        <div class="form-group mx-1">
-            <label class="form-radio form-inline">
-                <input type="radio" id="phase1" name="phase">
-                <i class="form-icon"></i>1페
-            </label>
-            <label class="form-radio form-inline">
-                <input type="radio" id="phase2" name="phase">
-                <i class="form-icon"></i>2페
-            </label>
-            <label class="form-radio form-inline">
-                <input type="radio" id="invalid" name="phase" checked>
-                <i class="form-icon"></i>인식 불가
-            </label>
-        </div>
-    </fieldset>
-    <div class="empty">
-        <video id="video" autoplay style="display: none;"></video>
-        <canvas id="canvas" width="333" height="333"></canvas>
-    </div>
-    <div class="toast text-center text-bold text-small">
-        <p>(4/9) 타이머 기계음 -> 목소리로 변경</p>
     </div>
     <script src="https://docs.opencv.org/4.10.0/opencv.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
