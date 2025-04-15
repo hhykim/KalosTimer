@@ -453,7 +453,7 @@ function clearLocalStorage() {
         icon: "question",
         toast: true,
         showCancelButton: true
-    }).then((result) => {
+    }).then(result => {
         if (result.isConfirmed) {
             Swal.fire({
                 titleText: "초기화 중...",
