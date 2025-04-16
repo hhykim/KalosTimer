@@ -308,7 +308,7 @@ function findCircles() {
             toast: true,
             showConfirmButton: false
         });
-        console.log(e.stack);
+        console.error(e.stack);
     }
 }
 
