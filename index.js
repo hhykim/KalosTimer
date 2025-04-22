@@ -107,19 +107,14 @@ start.addEventListener("click", async e => {
 
 function setCoordinates() {
     switch (resolution.value) {
-        case "1366x768":
-            sx1 = 21, sy1 = 107;
-            sx2 = 16, sy2 = 115;
-            break;
         case "1920x1080":
             if (!optimal.checked) {
                 sx1 = 30, sy1 = 151;
                 sx2 = 23, sy2 = 162;
-            } else {
-                sx1 = 21, sy1 = 107;
-                sx2 = 16, sy2 = 115;
+                break;
             }
-            break;
+            // fallthrough
+        case "1366x768":
         case "1920x1200":
             sx1 = 21, sy1 = 107;
             sx2 = 16, sy2 = 115;
