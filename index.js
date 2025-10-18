@@ -96,6 +96,9 @@ start.addEventListener("click", async e => {
     localStorage.setItem("optimal", optimal.checked ? "1" : "0");
     localStorage.setItem("mode", document.querySelector("input[name='mode']:checked").value);
 
+    if (navigator.userAgent.includes("Whale")) {
+        alert("네이버 웨일에서 일부 기능이 작동하지 않을 수 있습니다.");
+    }
     video.srcObject = await navigator.mediaDevices.getDisplayMedia();
     video.srcObject.getVideoTracks()[0].addEventListener("ended", e => stopVideo());
 
