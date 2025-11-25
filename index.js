@@ -26,7 +26,7 @@ if (localStorage.getItem("volume") !== null) {
     volume.value = localStorage.getItem("volume");
 }
 const audio = new Audio("audio.mp3");
-audio.volume = volume.value;
+audio.volume = Number(volume.value);
 
 const start = document.getElementById("start");
 const stop = document.getElementById("stop");
@@ -254,47 +254,41 @@ function setTrigger() {
 }
 
 function findCircles() {
+    let src, dst, mask1, mask2, low1, high1, low2, high2, circles;
+
     try {
         const cap = new cv.VideoCapture(video);
         video.width = video.videoWidth;
         video.height = video.videoHeight;
 
-        const src = new cv.Mat(video.height, video.width, cv.CV_8UC4);
+        src = new cv.Mat(video.height, video.width, cv.CV_8UC4);
         cap.read(src);
 
-        const rect = new cv.Rect(Number(sx.value), Number(sy.value), Number(ex.value - sx.value), Number(ey.value - sy.value));
-        const dst = src.roi(rect);
+        const rect = new cv.Rect(
+            Number(sx.value), Number(sy.value),
+            Number(ex.value - sx.value), Number(ey.value - sy.value)
+        );
+        dst = src.roi(rect);
 
         cv.cvtColor(dst, dst, cv.COLOR_RGBA2RGB);
         cv.cvtColor(dst, dst, cv.COLOR_RGB2HSV);
 
-        const mask1 = new cv.Mat();
-        const mask2 = new cv.Mat();
-        const low1 = new cv.Mat(dst.rows, dst.cols, dst.type(), [0, 140, 100, 0]);
-        const high1 = new cv.Mat(dst.rows, dst.cols, dst.type(), [10, 255, 255, 255]);
-        const low2 = new cv.Mat(dst.rows, dst.cols, dst.type(), [160, 140, 100, 0]);
-        const high2 = new cv.Mat(dst.rows, dst.cols, dst.type(), [179, 255, 255, 255]);
+        mask1 = new cv.Mat();
+        mask2 = new cv.Mat();
+        low1 = new cv.Mat(dst.rows, dst.cols, dst.type(), [0, 140, 100, 0]);
+        high1 = new cv.Mat(dst.rows, dst.cols, dst.type(), [10, 255, 255, 255]);
+        low2 = new cv.Mat(dst.rows, dst.cols, dst.type(), [160, 140, 100, 0]);
+        high2 = new cv.Mat(dst.rows, dst.cols, dst.type(), [179, 255, 255, 255]);
 
         cv.inRange(dst, low1, high1, mask1);
         cv.inRange(dst, low2, high2, mask2);
         cv.add(mask1, mask2, dst);
         cv.GaussianBlur(dst, dst, new cv.Size(5, 5), 0, 0);
 
-        const circles = new cv.Mat();
+        circles = new cv.Mat();
         cv.HoughCircles(dst, circles, cv.HOUGH_GRADIENT, 1, 50, 100, 20, 10, 35);
-        const result = circles.cols;
 
-        src.delete();
-        dst.delete();
-        mask1.delete();
-        mask2.delete();
-        low1.delete();
-        high1.delete();
-        low2.delete();
-        high2.delete();
-        circles.delete();
-
-        return result;
+        return circles.cols;
     } catch (e) {
         stop.click();
 
@@ -307,6 +301,9 @@ function findCircles() {
             showConfirmButton: false
         });
         console.error(e.stack);
+    } finally {
+        [src, dst, mask1, mask2, low1, high1, low2, high2, circles]
+            .forEach(m => m?.delete());
     }
 }
 
