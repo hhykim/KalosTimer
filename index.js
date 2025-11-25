@@ -33,13 +33,7 @@ const stop = document.getElementById("stop");
 const download = document.getElementById("download");
 
 const x = document.getElementById("x");
-if (localStorage.getItem("x") !== null) {
-    x.value = localStorage.getItem("x");
-}
 const y = document.getElementById("y");
-if (localStorage.getItem("y") !== null) {
-    y.value = localStorage.getItem("y");
-}
 const toggle = document.getElementById("toggle");
 if (localStorage.getItem("toggle") === "1") {
     toggle.checked = true;
@@ -49,21 +43,15 @@ if (localStorage.getItem("toggle") === "1") {
 }
 
 const sx = document.getElementById("sx");
-if (localStorage.getItem("sx") !== null) {
-    sx.value = localStorage.getItem("sx");
-}
 const sy = document.getElementById("sy");
-if (localStorage.getItem("sy") !== null) {
-    sy.value = localStorage.getItem("sy");
-}
 const ex = document.getElementById("ex");
-if (localStorage.getItem("ex") !== null) {
-    ex.value = localStorage.getItem("ex");
-}
 const ey = document.getElementById("ey");
-if (localStorage.getItem("ey") !== null) {
-    ey.value = localStorage.getItem("ey");
-}
+[x, y, sx, sy, ex, ey].forEach(el => {
+    const value = localStorage.getItem(el.id);
+    if (value !== null) {
+        el.value = value;
+    }
+});
 const meter = document.getElementById("meter");
 const test = document.getElementById("test");
 const popup = document.getElementById("popup");
@@ -387,14 +375,6 @@ download.addEventListener("click", e => {
     link.click();
 });
 
-x.addEventListener("input", e => {
-   localStorage.setItem("x", e.target.value);
-});
-
-y.addEventListener("input", e => {
-   localStorage.setItem("y", e.target.value);
-});
-
 toggle.addEventListener("click", e => {
     if (e.target.checked) {
         localStorage.setItem("toggle", "1");
@@ -409,20 +389,10 @@ toggle.addEventListener("click", e => {
     }
 });
 
-sx.addEventListener("input", e => {
-    localStorage.setItem("sx", e.target.value);
-});
-
-sy.addEventListener("input", e => {
-    localStorage.setItem("sy", e.target.value);
-});
-
-ex.addEventListener("input", e => {
-    localStorage.setItem("ex", e.target.value);
-});
-
-ey.addEventListener("input", e => {
-    localStorage.setItem("ey", e.target.value);
+[x, y, sx, sy, ex, ey].forEach(el => {
+    el.addEventListener("input", e => {
+        localStorage.setItem(el.id, e.target.value);
+    });
 });
 
 test.addEventListener("click", e => {

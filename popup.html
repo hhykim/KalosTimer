@@ -64,10 +64,7 @@
             ey.value = Math.max(startY, endY);
 
             const event = new InputEvent("input", { bubbles: true });
-            sx.dispatchEvent(event);
-            sy.dispatchEvent(event);
-            ex.dispatchEvent(event);
-            ey.dispatchEvent(event);
+            [sx, sy, ex, ey].forEach(el => el.dispatchEvent(event));
 
             close();
         });
