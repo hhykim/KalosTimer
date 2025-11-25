@@ -5,7 +5,7 @@ if (localStorage.getItem("resolution") !== null) {
     resolution.selectedIndex = localStorage.getItem("resolution");
 }
 const optimal = document.getElementById("optimal");
-if (localStorage.getItem("optimal") == "1") {
+if (localStorage.getItem("optimal") === "1") {
     optimal.checked = true;
 }
 
@@ -41,7 +41,7 @@ if (localStorage.getItem("y") !== null) {
     y.value = localStorage.getItem("y");
 }
 const toggle = document.getElementById("toggle");
-if (localStorage.getItem("toggle") == "1") {
+if (localStorage.getItem("toggle") === "1") {
     toggle.checked = true;
 
     x.disabled = false;
