@@ -124,12 +124,12 @@ function setPainterId() {
     const height = context.canvas.height;
 
     context.drawImage(video, 0, 0, width, height, 0, 0, width, height);
-    setTrigger();
+    processFrame();
 
     painterId = setTimeout(setPainterId, 1000);
 }
 
-function setTrigger() {
+function processFrame() {
     const active = [255, 102, 51, 255];
     const inactive = [102, 221, 255, 255];
 
