@@ -226,9 +226,12 @@
             <canvas id="canvas" width="333" height="333"></canvas>
         </div>
         <div class="toast text-center text-bold text-small">
-            <p>(4/9) 타이머 기계음 -> 목소리로 변경</p>
+            <p>&copy; 2023-<span id="year"></span> 민채솔@스카니아</p>
         </div>
     </div>
+    <script>
+        document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
     <script src="https://docs.opencv.org/4.10.0/opencv.js"></script>
     <script type="module" src="/src/main.js"></script>
 </body>
