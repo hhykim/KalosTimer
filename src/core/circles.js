@@ -31,7 +31,7 @@ export function findCircles() {
 
         cv.inRange(dst, low1, high1, mask1);
         cv.inRange(dst, low2, high2, mask2);
-        cv.add(mask1, mask2, dst);
+        cv.bitwise_or(mask1, mask2, dst);
         cv.GaussianBlur(dst, dst, new cv.Size(5, 5), 0, 0);
 
         circles = new cv.Mat();
