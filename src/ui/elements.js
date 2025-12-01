@@ -8,6 +8,7 @@ const ids = [
     "video", "canvas"
 ];
 
+/** @type {import("../types/dom.js").DomElements} */
 export const dom = {};
 ids.forEach(id => {
     dom[id] = document.getElementById(id);
