@@ -33,6 +33,20 @@
 
 <br>
 
+## 사용법
+
+1. [Node.js](https://nodejs.org/) 20.19+ 또는 22.12+를 설치합니다.
+2. 의존성 패키지를 설치합니다.
+```bash
+npm install
+```
+3. 개발 서버를 실행합니다.
+```bash
+npm run dev
+```
+
+<br>
+
 ## 문의
 
 [카카오톡 오픈채팅](https://open.kakao.com/me/csmin) by 민채솔@스카니아
