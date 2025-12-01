@@ -1,4 +1,5 @@
 import { findCircles } from "@/core/circles.js";
+import { COLOR, DELAY, OFFSET } from "@/core/constants.js";
 import { setTimer } from "@/core/timer.js";
 import { state } from "@/state/state.js";
 import { dom } from "@/ui/elements.js";
@@ -14,9 +15,6 @@ export function setPainterId() {
 }
 
 function processFrame() {
-    const active = [255, 102, 51, 255];
-    const inactive = [102, 221, 255, 255];
-
     let dx, dy;
     if (dom.toggle.checked) {
         dx = Number(dom.x.value);
@@ -29,37 +27,37 @@ function processFrame() {
     const rgba1 = dom.context.getImageData(state.sx1 + dx, state.sy1 + dy, 1, 1).data;
     const rgba2 = dom.context.getImageData(state.sx2 + dx, state.sy2 + dy, 1, 1).data;
 
-    if (rgba1.every((v, i) => Math.abs(v - active[i]) < 10)) {
+    if (colorsMatch(rgba1, COLOR.ACTIVE)) {
         dom.phase1.checked = true;
 
         if (!state.running) {
             state.running = true;
-            state.delay = 15000;
+            state.delay = DELAY.P1.COMMON;
 
-            setTimer(state.delay - 4500);
+            setTimer(state.delay - OFFSET.PRE_TRIGGER);
         }
-    } else if (rgba1.every((v, i) => Math.abs(v - inactive[i]) < 10)) {
+    } else if (colorsMatch(rgba1, COLOR.INACTIVE)) {
         dom.phase1.checked = true;
         state.running = false;
 
         clearTimeout(state.timerId);
-    } else if (rgba2.every((v, i) => Math.abs(v - active[i]) < 10)) {
+    } else if (colorsMatch(rgba2, COLOR.ACTIVE)) {
         dom.phase2.checked = true;
 
         if (!state.running) {
             state.running = true;
 
             if (dom.normal.checked) {
-                state.delay = 15000;
+                state.delay = DELAY.P2.NORMAL;
             } else if (dom.chaos.checked) {
-                state.delay = 13500;
+                state.delay = DELAY.P2.CHAOS;
             } else {
-                state.delay = 13000;
+                state.delay = DELAY.P2.EXTREME;
             }
 
-            setTimer(state.delay - 4500);
+            setTimer(state.delay - OFFSET.PRE_TRIGGER);
         }
-    } else if (rgba2.every((v, i) => Math.abs(v - inactive[i]) < 10)) {
+    } else if (colorsMatch(rgba2, COLOR.INACTIVE)) {
         dom.phase2.checked = true;
         state.running = false;
 
@@ -77,50 +75,54 @@ function processFrame() {
 
             if (dom.phase1.checked) {
                 if (dom.chaos.checked) {
-                    state.delay = 12000;
+                    state.delay = DELAY.ENHANCED.P1.CHAOS;
 
                     clearTimeout(state.timerId);
-                    setTimer((state.lastDelay - 3000) - (performance.now() - state.timestamp));
+                    setTimer((state.lastDelay - OFFSET.P1.CHAOS) - (performance.now() - state.timestamp));
                 } else {
-                    state.delay = 10000;
+                    state.delay = DELAY.ENHANCED.P1.EXTREME;
 
                     clearTimeout(state.timerId);
-                    setTimer((state.lastDelay - 5000) - (performance.now() - state.timestamp));
+                    setTimer((state.lastDelay - OFFSET.P1.EXTREME) - (performance.now() - state.timestamp));
                 }
             } else if (dom.phase2.checked) {
                 if (dom.chaos.checked) {
-                    state.delay = 11500;
+                    state.delay = DELAY.ENHANCED.P2.CHAOS;
                 } else {
-                    state.delay = 11000;
+                    state.delay = DELAY.ENHANCED.P2.EXTREME;
                 }
 
                 clearTimeout(state.timerId);
-                setTimer((state.lastDelay - 2000) - (performance.now() - state.timestamp));
+                setTimer((state.lastDelay - OFFSET.P2.COMMON) - (performance.now() - state.timestamp));
             }
         } else if (state.enhanced && findCircles() < 3) {
             state.enhanced = false;
 
             if (dom.phase1.checked) {
-                state.delay = 15000;
+                state.delay = DELAY.P1.COMMON;
 
                 clearTimeout(state.timerId);
                 if (dom.chaos.checked) {
-                    setTimer((state.lastDelay + 3000) - (performance.now() - state.timestamp));
+                    setTimer((state.lastDelay + OFFSET.P1.CHAOS) - (performance.now() - state.timestamp));
                 } else {
-                    setTimer((state.lastDelay + 5000) - (performance.now() - state.timestamp));
+                    setTimer((state.lastDelay + OFFSET.P1.EXTREME) - (performance.now() - state.timestamp));
                 }
             } else if (dom.phase2.checked) {
                 if (dom.chaos.checked) {
-                    state.delay = 13500;
+                    state.delay = DELAY.P2.CHAOS;
                 } else {
-                    state.delay = 13000;
+                    state.delay = DELAY.P2.EXTREME;
                 }
 
                 clearTimeout(state.timerId);
-                setTimer((state.lastDelay + 2000) - (performance.now() - state.timestamp));
+                setTimer((state.lastDelay + OFFSET.P2.COMMON) - (performance.now() - state.timestamp));
             }
         }
     } else {
         state.enhanced = false;
     }
+}
+
+function colorsMatch(a, b) {
+    return a.every((v, i) => Math.abs(v - b[i]) < COLOR.TOLERANCE);
 }

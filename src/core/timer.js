@@ -1,3 +1,4 @@
+import { OFFSET } from "@/core/constants.js";
 import { state } from "@/state/state.js";
 import { dom } from "@/ui/elements.js";
 
@@ -6,7 +7,7 @@ export function setTimer(once) {
     state.timestamp = performance.now();
 
     if (once < 0) {
-        state.nextDelay = state.delay - 4500;
+        state.nextDelay = state.delay - OFFSET.PRE_TRIGGER;
     }
     state.timerId = setTimeout(setTimerId, once);
 }
