@@ -36,7 +36,7 @@ jobs:
 
       - name: Insert build date (KST)
         run: |
-          BUILD_DATE=$(TZ='Asia/Seoul' date +'%Y. %m. %d.')
+          BUILD_DATE=$(TZ='Asia/Seoul' date +%F)
           sed -i "s|__BUILD_DATE__|$BUILD_DATE|g" dist/index.html
 
       - name: Setup Pages
