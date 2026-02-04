@@ -16,6 +16,9 @@ export function setCoordinates() {
             state.sx2 = 16, state.sy2 = 115;
             break;
         case "2560x1440":
+            state.sx1 = 40, state.sy1 = 201;
+            state.sx2 = 31, state.sy2 = 216;
+            break;
         case "2560x1600":
         case "2732x1536":
             state.sx1 = 43, state.sy1 = 215;
