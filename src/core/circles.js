@@ -1,3 +1,4 @@
+import cv from "@techstark/opencv-js"
 import Swal from "sweetalert2";
 
 import { dom } from "@/ui/elements.js";
