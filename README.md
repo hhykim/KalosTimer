@@ -3,7 +3,7 @@
 ![OpenCV](https://img.shields.io/badge/OpenCV-5C3EE8?style=for-the-badge&logo=opencv&logoColor=white)
 ![WebRTC](https://img.shields.io/badge/WebRTC-333333?style=for-the-badge&logo=webrtc&logoColor=white)
 
-![](screenshot.png?raw=true)
+https://github.com/user-attachments/assets/fbe393a6-24b5-4514-b014-f1ac51d5bffc
 
 메이플스토리 보스 칼로스의 공격 패턴에 미리 대응할 수 있도록 도와주는 웹 타이머입니다.
 
