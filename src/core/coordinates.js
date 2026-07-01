@@ -9,7 +9,7 @@ export function setCoordinates() {
                 state.sx2 = 23, state.sy2 = 162;
                 break;
             }
-        // fallthrough
+        // fall through
         case "1366x768":
         case "1920x1200":
             state.sx1 = 21, state.sy1 = 107;
