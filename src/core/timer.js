@@ -2,6 +2,13 @@ import { OFFSET } from "@/core/constants.js";
 import { state } from "@/state/state.js";
 import { dom } from "@/ui/elements.js";
 
+export function restartTimer() {
+    if (!state.running) return;
+
+    clearTimeout(state.timerId);
+    setTimer(state.delay - OFFSET.RESTART);
+}
+
 export function setTimer(once) {
     state.lastDelay = once;
     state.timestamp = performance.now();

@@ -1,6 +1,12 @@
 import { startCapture, stopCapture } from "@/core/capture.js";
 import { findCircles } from "@/core/circles.js";
+import { restartTimer } from "@/core/timer.js";
 import { dom } from "@/ui/elements.js";
+
+document.addEventListener("keydown", e => {
+    if (e.code !== "KeyQ" || e.repeat) return;
+    restartTimer();
+});
 
 dom.volume.addEventListener("input", e => {
     localStorage.setItem("volume", e.target.value);
